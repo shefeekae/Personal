@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://smtpjs.com/v3/smtp.js"></script>
 	<script src="index.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 	
 </head>
@@ -289,7 +290,7 @@
 
 			<div class="row no-gutters block-9">
 				<div class="col-md-6 order-md-last d-flex">
-					<form id="myForm" action="" method="post" enctype="text/plain"
+					<form id="submit-form"  action=""  enctype="text/plain"
 						class="bg-light p-4 p-md-5 contact-form">
 						<div class="form-group">
 							<input type="text" id="name" class="form-control" name="name" placeholder="Your Name">
@@ -420,23 +421,7 @@
 				phone.focus();
 				return false;
 			}
-			Email.send({
-				Host: "smtp.mailtrap.io",
-				Username: "d88c20a3735ffe",
-				Password: "be423126ca1b4f",
-				To: 'shafemohd000@gmail.com',
-				From: email,
-				Subject: "Enquiry",
-				Body: "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
-			
-	// Host: "smtp.gmail.com",
-	// Username : "<sender’s email address>",
-	// Password : "<email password>",
-	// To : '<recipient’s email address>',
-	// From : "<sender’s email address>",
-	// Subject : "<email subject>",
-	// Body : "<email body>",
-			}).then(
+			then(
 				message => alert("Success")
 			);
 
@@ -452,6 +437,25 @@
 
 
 	</script>
+	<script>
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbzu4iBY87GQrMpsijZPFL8jqEg8xUxbtoDAG3erGrtJW0e0YHZz251BA_q9W_M5b8eXDg/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
+    </script>
 
 </body>
 
